@@ -168,6 +168,35 @@ psql -h localhost -p 5432 -U postgres -d postgres -f dados.sql
 
 Esse comando presume as credenciais locais de exemplo; adapte `-U` e `-d` se você configurou outro banco. Execute preferencialmente em uma base de demonstração limpa. O script inclui verificações de volume e integridade, com `BEGIN`/`COMMIT`.
 
-## Testes recomendados
+## 15. Testes
 
-Valide no Postman: `201` no cadastro; `200` nas consultas e atualizações; `400` para datas ausentes ou mal formatadas, valores inválidos e campos obrigatórios; `404` para IDs inexistentes; `409` para e-mail/código duplicado, inativos, segunda ordem aberta e transições de status inválidas. Reinicie a aplicação para verificar a persistência no PostgreSQL. Em `src/test` existe o teste inicial de contexto do Spring.
+As funcionalidades podem ser verificadas pelo Postman, utilizando os endpoints da aplicação.
+
+### Cenários recomendados
+
+| Teste                               | Resultado esperado |
+| ----------------------------------- | ------------------ |
+| Cadastro válido de cliente          | 201                |
+| E-mail duplicado                    | 409                |
+| Cliente inexistente                 | 404                |
+| Cadastro válido de serviço          | 201                |
+| Código de serviço duplicado         | 409                |
+| Preço inválido                      | 400                |
+| Abertura de ordem válida            | 201                |
+| Cliente ou serviço inativo          | 409                |
+| Cliente com outra ordem aberta      | 409                |
+| Conclusão de ordem aberta           | 200                |
+| Alteração de ordem já finalizada    | 409                |
+| Data de entrada ausente ou inválida | 400                |
+
+Também é recomendado reiniciar a aplicação e verificar se os registros permanecem armazenados no PostgreSQL.
+
+O diretório `src/test` contém o teste inicial de contexto do Spring Boot.
+
+## 16. Considerações finais
+
+A Roda Livre reúne funcionalidades fundamentais de desenvolvimento back-end com Java e Spring Boot, incluindo construção de APIs REST, persistência em banco relacional, validação de dados e implementação de regras de negócio.
+
+A exportação CSV e a criação do dashboard ampliam a utilização dos dados, permitindo acompanhar indicadores e identificar os serviços mais procurados.
+
+O projeto foi desenvolvido com foco na organização do código, na integridade das informações e no atendimento aos requisitos propostos pelo desafio técnico.
