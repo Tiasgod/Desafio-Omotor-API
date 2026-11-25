@@ -56,8 +56,6 @@ class ClienteServiceTest {
         );
     }
 
-    // TESTE 1 - Cadastrar cliente válido
-
     @Test
     void deveCadastrarClienteValido() {
 
@@ -81,8 +79,6 @@ class ClienteServiceTest {
 
         verify(clienteRepository).save(any(ClienteServicoEntity.class));
     }
-
-    // TESTE 2 - Normalizar e-mail
 
     @Test
     void deveNormalizarEmailNoCadastro() {
@@ -112,8 +108,6 @@ class ClienteServiceTest {
         );
     }
 
-    // TESTE 3 - E-mail duplicado
-
     @Test
     void deveRetornar409QuandoEmailJaExiste() {
 
@@ -141,8 +135,6 @@ class ClienteServiceTest {
         verify(clienteRepository, never()).save(any());
     }
 
-    // TESTE 4 - Buscar cliente existente
-
     @Test
     void deveBuscarClientePorId() {
 
@@ -158,8 +150,6 @@ class ClienteServiceTest {
 
         verify(clienteRepository).findById(1L);
     }
-
-    // TESTE 5 - Cliente inexistente
 
     @Test
     void deveRetornar404QuandoClienteNaoExiste() {
@@ -177,8 +167,6 @@ class ClienteServiceTest {
                 erro.getStatusCode()
         );
     }
-
-    // TESTE 6 - Atualizar cliente
 
     @Test
     void deveAtualizarCliente() {
@@ -211,8 +199,6 @@ class ClienteServiceTest {
         verify(clienteRepository).save(cliente);
     }
 
-    // TESTE 7 - E-mail duplicado na atualização
-
     @Test
     void deveRetornar409AoAtualizarComEmailDuplicado() {
 
@@ -244,8 +230,6 @@ class ClienteServiceTest {
 
         verify(clienteRepository, never()).save(any());
     }
-
-    // TESTE 8 - Listagem paginada
 
     @Test
     void deveListarClientesComPaginacao() {
