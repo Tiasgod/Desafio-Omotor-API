@@ -21,13 +21,8 @@ public class ExportacaoController {
         byte[] arquivo = exportacaoService.exportarCsv();
 
         return ResponseEntity.ok()
-                .header(
-                        HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"rodalivre-dados.csv\""
-                )
-                .contentType(new MediaType(
-                        "text", "csv", StandardCharsets.UTF_8
-                ))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"rodalivre-dados.csv\"")
+                .contentType(new MediaType("text", "csv", StandardCharsets.UTF_8))
                 .body(arquivo);
     }
 }

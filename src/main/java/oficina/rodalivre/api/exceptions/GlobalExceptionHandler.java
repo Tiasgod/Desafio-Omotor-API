@@ -71,8 +71,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErroResponseDTO> tratarParametroAusente(
             MissingServletRequestParameterException ex) {
 
-        return criarResposta(HttpStatus.BAD_REQUEST,
-                "Parâmetro obrigatório ausente: " + ex.getParameterName());
+        return criarResposta(HttpStatus.BAD_REQUEST,"Parâmetro obrigatório ausente: " + ex.getParameterName());
     }
 
     @ExceptionHandler(ResponseStatusException.class)
